@@ -20,21 +20,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>observación de prueba</td>
-                        <td>
-                            <a href="#" title="editar" class="btn btn-info btn-circle btn-sm">
-                                <i class="far fa-edit"></i>
-                            </a>
-                            <a href="#" title="eliminar" class="btn btn-danger btn-circle btn-sm" onclick="return remove();">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
+                    <@foreach ($observations as $observation)
+                        
+                        <tr>
+                            <td>{{ $observation['id'] }}</td>
+                            <td>{{ $observation['observacion de prueba'] }}</td>
+                            <td>
+                                <a href="{{ route('observation.edit', $observation['id']) }}" title="editar" 
+                                class="btn btn-info btn-circle btn-sm">
+                                    <i class="far fa-edit"></i>
+                                </a>
+                                <a href="{{ route('observation.destroy', $observation['id']) }}" title="eliminar" 
+                                class="btn btn-danger btn-circle btn-sm" onclick="return remove();">
+                                    <i class="fas fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
-
         </div>
     </div>
 
