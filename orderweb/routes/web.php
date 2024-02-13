@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\CausalController;
 use App\Http\Controllers\ObservationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TechnicianController;
 use App\Http\Controllers\TypeActivityController;
 use Illuminate\Support\Facades\Route;
@@ -75,17 +76,12 @@ Route :: prefix('technician')->group(function(){
 });
 
 
-Route::get('/order/create', function () {
-    return view('order.create');
-})->name('order.create');
-
-
-Route::get('/order/index', function () {
-    return view('order.index');
-})->name('order.index');
-
-Route::get('/order/edit', function () {
-    return view('order.edit');
-})->name('order.edit');
-
+Route :: prefix('order')->group(function(){
+    Route::get('/index',[OrderController::class, 'index'])->name('order.index');
+    Route::get('/create',[OrderController::class, 'create'])->name('order.create');
+    Route::get('/edit/{id}',[OrderController::class, 'edit'])->name('order.edit');
+    Route::post('create',[OrderController::class, 'store'])->name('order.store');//crear
+    Route::put('/edit/{id}',[OrderController::class, 'update'])->name('order.update');//actualizar
+    Route::get('/destroy{id}',[OrderController::class, 'destroy'])->name('order.destroy');//eliminar
+});
 
