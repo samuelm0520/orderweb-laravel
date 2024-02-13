@@ -5,7 +5,7 @@
     @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4">
-            <form action="#" method="POST">
+            <form action="{{ route('order.store') }}" method="POST">
                 @csrf
                 <div class="row form-group">
                     <div class="col-lg-4 mb-4">
@@ -25,61 +25,70 @@
                         <select name="city" id="city"
                             class="form-control" required>
                             <option value="">Seleccione</option>
-                            <option value="tulua">Tuluá</option>
-                            <option value="buga">Buga</option>
-                            <option value="cali">Cali</option>
+                            @foreach ($cities as $city)
+                                <option value="{{ $city['value'] }}">{{ $city['name'] }}</option>                              
+                            @endforeach
     
                         </select>
     
                     </div>
                    
-                </div>
-                <div class="row form-group">
-                    <div class="col-lg-6 mb-4">
-                    <label for="observation_id">Observación</label>
-                    <select name="observation_id" id="observation_id"
-                        class="form-control" required>
-                        <option value="">Seleccione</option>
-
-                    </select>
-
                     </div>
-                    <div class="col-lg-6 mb-4">
-                        <label for="causal_id">Causal</label>
-                        <select name="causal_id" id="causal_id"
+                    <div class="row form-group">
+                        <div class="col-lg-6 mb-4">
+                        <label for="observation_id">Observación</label>
+                        <select name="observation_id" id="observation_id"
                             class="form-control" required>
                             <option value="">Seleccione</option>
-    
-                        </select>
-    
-                        </div>
-                </div>
+                            @foreach ($observations as $observation)
+                                <option value="{{ $observation['id'] }}">{{ $observation['description'] }}</option>                                
+                            @endforeach
 
-                <div class="row form-group">
-                    <div class="col-lg-6 mb-4">
-                        <button class="btn btn-primary btn-block"
-                            type="submit">
-                            Guardar
-                        </button>
+                        </select>
+
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <label for="causal_id">Causal</label>
+                            <select name="causal_id" id="causal_id"
+                                class="form-control" required>
+                                <option value="">Seleccione</option>
+                                @foreach ($causals as $causal)
+                                    <option value="{{ $causal['id'] }}">
+                                        {{ $causal['description'] }}
+                                    </option>                                
+                                @endforeach
+        
+                            </select>
+        
+                            </div>
                     </div>
-                   
-                    <div class="col-lg-6 mb-4">
-                        <a href="{{ route('order.index') }}" class="btn btn-secondary btn-block">
-                            Cancelar
-                        </a>
+
+                    <div class="row form-group">
+                        <div class="col-lg-6 mb-4">
+                            <button class="btn btn-primary btn-block"
+                                type="submit">
+                                Guardar
+                            </button>
+                        </div>
+                    
+                        <div class="col-lg-6 mb-4">
+                            <a href="{{ route('order.index') }}" class="btn btn-secondary btn-block">
+                                Cancelar
+                            </a>
+
+                        </div>
+                    </div>
+            
+                    <div class="row">
+                    <div class="col-lg-12 mb-4">
+                        <div class="alert alert-warning" role="alert">
+                            <i class="fa-solid fa-lightbulb"></i> Para añadir actividades a la orden
+                            primer se debe crearla y luego dar clic en la acción Editar
+                        </div>
 
                     </div>
                 </div>
             </form>
-            <div class="row">
-                <div class="col-lg-12 mb-4">
-                    <div class="alert alert-warning" role="alert">
-                        <i class="fa-solid fa-lightbulb"></i> Para añadir actividades a la orden
-                         primer se debe crearla y luego dar clic en la acción Editar
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
 @endsection

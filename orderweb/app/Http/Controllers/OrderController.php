@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Causal;
+use App\Models\Observation;
 use App\Models\Order;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class OrderController extends Controller
@@ -22,7 +26,17 @@ class OrderController extends Controller
      */
     public function create()
     {
+        $causals = Causal::all();
+        $observations = Observation::all();
+        $cities = array(
 
+            ['name' => 'Buga', 'value' => 'Buga'],
+            ['name' => 'Cali', 'value' => 'Cali'],
+            ['name' => 'Tulua', 'value' => 'Tuluá'],
+        );
+
+
+        return view('order.create', compact('causals','observations','cities'));                                       
     }
 
     /**
@@ -30,7 +44,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $order = Order::create($request->all());
+        $order = Order::created($request->all());
         session()->flash('message','Registro creado exitosamente');
         return redirect()->route('order.index');
     }
@@ -48,7 +62,28 @@ class OrderController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $order = Order::find($id);
+        if($order)
+        {
+            $causals = Causal::all();
+            $observations = Observation::all();
+            $cities = array(
+
+                ['name' => 'Buga', 'value' => 'Buga'],
+                ['name' => 'Cali', 'value' => 'Cali'],
+                ['name' => 'Tulua', 'value' => 'Tuluá'],
+            );
+            //Consultar ACtividades asociadas y no asociadas
+            $activitiesAdded = $order->activities;
+            //consultar actividades no asociadas 
+            $query = DB::select('select * from activity where activity.id not in 
+                (select order_activity.activity_id from order_activity where order_activity.order_id = ?)', [$id]);
+            $activitiesNotInOrder = Collection:: make($query);
+            return view('order.edit',compact('order','causals','observations','cities','activitiesAdded', 'activitiesNotInOrder'));
+            
+        }
+        session()->flash('warning','No se encuentra el registro solicitado');
+        return redirect()->route('order.index');
     }
 
     /**
