@@ -23,7 +23,7 @@
                     <@foreach ($type_activities as $type_activity)
                         <tr>
                             <td>{{ $type_activity['id'] }}</td>
-                            <td>{{ $type_activity['tipo de prueba'] }}</td>
+                            <td>{{ $type_activity['description'] }}</td>
                             
                             <td>
                                 <a href="{{ route('type_activity.edit', $type_activity['id']) }}" title="editar" 

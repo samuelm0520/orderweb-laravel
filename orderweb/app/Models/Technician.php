@@ -4,12 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use League\CommonMark\Node\Block\Document;
 
 class Technician extends Model
 {
     use HasFactory;
     
     protected $table = 'technician';
+    public $incrementing = false;
+    protected $primaryKey = 'document';
     protected $fillable = [
 
         'document',

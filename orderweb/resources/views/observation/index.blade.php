@@ -24,7 +24,7 @@
                         
                         <tr>
                             <td>{{ $observation['id'] }}</td>
-                            <td>{{ $observation['observacion de prueba'] }}</td>
+                            <td>{{ $observation['description'] }}</td>
                             <td>
                                 <a href="{{ route('observation.edit', $observation['id']) }}" title="editar" 
                                 class="btn btn-info btn-circle btn-sm">
