@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Causal;
 use App\Models\Observation;
 use App\Models\Order;
@@ -124,6 +125,50 @@ class OrderController extends Controller
 
     public function add_activity(string $order_id, string $activity_id)
     {
-        
+        $order = Order::find($order_id);
+        if(!$order)
+        {
+            session()->flash('error', 'No se encontraron la orden');
+            return redirect()->route('order.edit', $order_id);
+        }
+
+        $activity = Activity::find($activity_id);
+        if(!$activity)
+        {
+            session()->flash('error', 'No se encontraron la orden');
+            return redirect()->route('order.edit', $order_id);
+        }
+
+        $order->activities()->attach($activity->id);
+        session()->flash('message','Actividad agregada exitosamente');
+        return redirect()->route('order.edit',$order_id);
+
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     */
+
+    public function remove_activity(string $order_id, string $activity_id)
+    {
+        $order = Order::find($order_id);
+        if(!$order)
+        {
+            session()->flash('error', 'No se encontraron la orden');
+            return redirect()->route('order.edit', $order_id);
+        }
+
+        $activity = Activity::find($activity_id);
+        if(!$activity)
+        {
+            session()->flash('error', 'No se encontraron la orden');
+            return redirect()->route('order.edit', $order_id);
+        }
+
+        $order->activities()->detach($activity->id);
+        session()->flash('message','Actividad removida exitosamente');
+        return redirect()->route('order.edit',$order_id);
+
     }
 }
