@@ -134,6 +134,38 @@
                                     </tbody>           
                                 </table>
                             </div>
+                            <div class="col-lg-6 mb-4">
+                            <label for="table_data">Actividades agragadas</label>
+                            <table id="table_data" class="table table-stripped table-hover">
+                                <thead>
+                                    <th>Id</th>
+                                    <th>Descripcion</th>
+                                    <th>Horas</th>
+                                    <th>Retirar</th>  
+                                </thead>
+                                <tbody>
+                                    @if (count($activitiesNotInOrder)==0)
+                                        <tr>
+                                            <td colspan="4">
+                                                No existen actividades disponibles
+                                            </td>
+                                        </tr>
+                                    @else
+                                        @foreach ($activitiesAdded as $activity)
+                                            <tr>
+                                                <td>{{ $activity->id }}</td>
+                                                <td>{{ $activity->description }}</td>
+                                                <td>{{ $activity->hours }}</td>
+                                                <td>
+                                                    <a href="#" title="agregar" class="btn btn-danger btn-circle btn-sm">
+                                                        <i class="fas fa-fw fa-minus"></i>
+                                                    </a>
+                                                <td>
+                                            </tr>
+                                        @endforeach
+                                    @endif        
+                                </tbody>           
+                            </table>
                         </div>
                    </div>
                 </div>

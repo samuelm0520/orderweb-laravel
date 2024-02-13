@@ -80,7 +80,7 @@ class OrderController extends Controller
                 (select order_activity.activity_id from order_activity where order_activity.order_id = ?)', [$id]);
             $activitiesNotInOrder = Collection:: make($query);
             return view('order.edit',compact('order','causals','observations','cities','activitiesAdded', 'activitiesNotInOrder'));
-            
+
         }
         session()->flash('warning','No se encuentra el registro solicitado');
         return redirect()->route('order.index');
@@ -120,5 +120,10 @@ class OrderController extends Controller
             session()->flash('warning','No se encuentra el registro solicitado');
         }
         return redirect()->route('order.index');
+    }
+
+    public function add_activity(string $order_id, string $activity_id)
+    {
+        
     }
 }

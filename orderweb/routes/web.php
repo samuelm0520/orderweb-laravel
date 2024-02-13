@@ -34,7 +34,7 @@ Route :: prefix('causal')->group(function(){
     Route::get('/edit/{id}',[CausalController::class, 'edit'])->name('causal.edit');
     Route::post('create',[CausalController::class, 'store'])->name('causal.store');//crear
     Route::put('/edit/{id}',[CausalController::class, 'update'])->name('causal.update');//actualizar
-    Route::get('/destroy{id}',[CausalController::class, 'destroy'])->name('causal.destroy');//eliminar
+    Route::get('/destroy/{id}',[CausalController::class, 'destroy'])->name('causal.destroy');//eliminar
 });
 
 Route :: prefix('observation')->group(function(){
@@ -43,7 +43,7 @@ Route :: prefix('observation')->group(function(){
     Route::get('/edit/{id}',[ObservationController::class, 'edit'])->name('observation.edit');
     Route::post('create',[ObservationController::class, 'store'])->name('observation.store');//crear
     Route::put('/edit/{id}',[ObservationController::class, 'update'])->name('observation.update');//actualizar
-    Route::get('/destroy{id}',[ObservationController::class, 'destroy'])->name('observation.destroy');//eliminar
+    Route::get('/destroy/{id}',[ObservationController::class, 'destroy'])->name('observation.destroy');//eliminar
 });
 
 
@@ -53,7 +53,7 @@ Route :: prefix('type_activity')->group(function(){
     Route::get('/edit/{id}',[TypeActivityController::class, 'edit'])->name('type_activity.edit');
     Route::post('create',[TypeActivityController::class, 'store'])->name('type_activity.store');//crear
     Route::put('/edit/{id}',[TypeActivityController::class, 'update'])->name('type_activity.update');//actualizar
-    Route::get('/destroy{id}',[TypeActivityController::class, 'destroy'])->name('type_activity.destroy');//eliminar
+    Route::get('/destroy/{id}',[TypeActivityController::class, 'destroy'])->name('type_activity.destroy');//eliminar
 });
 
 Route :: prefix('activity')->group(function(){
@@ -62,7 +62,7 @@ Route :: prefix('activity')->group(function(){
     Route::get('/edit/{document}',[ActivityController::class, 'edit'])->name('activity.edit');
     Route::post('create',[ActivityController::class, 'store'])->name('activity.store');//crear
     Route::put('/edit/{document}',[ActivityController::class, 'update'])->name('activity.update');//actualizar
-    Route::get('/destroy{document}',[ActivityController::class, 'destroy'])->name('activity.destroy');//eliminar
+    Route::get('/destroy/{document}',[ActivityController::class, 'destroy'])->name('activity.destroy');//eliminar
 });
 
 
@@ -72,7 +72,7 @@ Route :: prefix('technician')->group(function(){
     Route::get('/edit/{id}',[TechnicianController::class, 'edit'])->name('technician.edit');
     Route::post('create',[TechnicianController::class, 'store'])->name('technician.store');//crear
     Route::put('/edit/{id}',[TechnicianController::class, 'update'])->name('technician.update');//actualizar
-    Route::get('/destroy{id}',[TechnicianController::class, 'destroy'])->name('technician.destroy');//eliminar
+    Route::get('/destroy/{id}',[TechnicianController::class, 'destroy'])->name('technician.destroy');//eliminar
 });
 
 
@@ -82,6 +82,10 @@ Route :: prefix('order')->group(function(){
     Route::get('/edit/{id}',[OrderController::class, 'edit'])->name('order.edit');
     Route::post('create',[OrderController::class, 'store'])->name('order.store');//crear
     Route::put('/edit/{id}',[OrderController::class, 'update'])->name('order.update');//actualizar
-    Route::get('/destroy{id}',[OrderController::class, 'destroy'])->name('order.destroy');//eliminar
+    Route::get('/destroy/{id}',[OrderController::class, 'destroy'])->name('order.destroy');//eliminar
+    Route::get('/add_activity/{order_id}/{activity_id}',[OrderController::class, 'add_activity'])->name('order.add_activity');
+    Route::get('/remove_activity/{order_id}/{activity_id}',[OrderController::class, 'remove_activity'])->name('order.remove_activity');
+
 });
+
 
