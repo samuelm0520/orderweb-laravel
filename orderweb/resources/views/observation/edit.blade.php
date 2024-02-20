@@ -5,7 +5,7 @@
     @include('templates.messages')
     <div class="row">
         <div class="col-lg-12 mb-4">
-            <form action="{{ route('causal.update', $observation['id']) }}" method="POST">
+            <form action="{{ route('observation.update', $observation['id']) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row form-group">
@@ -13,7 +13,7 @@
                         <label for="description">Descripción</label>
                         <input type="text" class="form-control"
                         id="description" name="description" required
-                        value="{{ $observation['description'] }}">>
+                        value="{{ $observation['description'] }}">
                     </div>
                 </div>
                 <div class="row form-group">

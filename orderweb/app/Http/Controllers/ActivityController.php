@@ -62,8 +62,6 @@ class ActivityController extends Controller
 
             session()->flash('warning','No se encontro el registro solicitado');
             return redirect()->route('activity.index');
-
-
     }
 
     /**
