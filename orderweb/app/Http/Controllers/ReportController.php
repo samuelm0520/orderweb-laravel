@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Technician;
 use App\Models\User;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -14,7 +15,8 @@ class ReportController extends Controller
      */
     public function index()
     {
-        return view("reports.index");
+        $technicians = Technician::all();
+        return view("reports.index", compact('technicians'));
     }
 
 
@@ -43,6 +45,19 @@ class ReportController extends Controller
         return $pfp->download('users.pdf');
     }
 
+    public function export_activities_by_technician(Request $request)
+    {
+        $technician = Technician::where('document','=', $request['technician_id'])->first();
+        $activities = Activity::where('technician_id','=', $request['technician_id'])->get();
+        $data = array(
+            'technician' => $technician,
+            'activities' => $activities
+        );
+        $pdf = Pdf::loadView('reports.export_activities_by_technician',$data)->setPaper('letter','portrait');
+        return $pdf->download('ActivitiesByTechnician.pdf');
+    }
+
+    
 
     /**
      * Show the form for creating a new resource.

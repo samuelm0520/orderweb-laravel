@@ -2,11 +2,11 @@
 @section('header','reporte de Usuarios')
 @section('content')
     <section id="results">
-        @if ($technicians)
+        @if ($users)
             <table id="ReportTable">
                 <thead>
                     <tr>
-                        <th>id</th>
+                        <th>Id</th>
                         <th>Nombre</th>
                         <th>Correo</th>
                     </tr>
@@ -14,9 +14,9 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr>
-                            <th>{{ $users['id'] }}</th>
-                            <th>{{ $users['name'] }}</th>
-                            <th>{{ $users['email'] }}</th>
+                            <th>{{ $user['id'] }}</th>
+                            <th>{{ $user['name'] }}</th>
+                            <th>{{ $user['email'] }}</th>
                         </tr>
                     @endforeach
                 </tbody>
